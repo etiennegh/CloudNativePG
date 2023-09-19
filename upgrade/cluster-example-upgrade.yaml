@@ -5,7 +5,7 @@ metadata:
   namespace: cnpg
 spec:
   instances: 3
-  imageName: ghcr.io/cloudnative-pg/postgresql:14.5
+  #imageName: ghcr.io/cloudnative-pg/postgresql:14.5
   #imagePullPolicy: Always
   minSyncReplicas: 1
   maxSyncReplicas: 1
@@ -30,7 +30,9 @@ spec:
   backup:
     #target: "prefer-standby"
     barmanObjectStore:
-      destinationPath: "cnpg-backups"
+      wal:
+        maxParallel: 8
+      destinationPath: "https://st8001xplanetesting.blob.core.windows.net/kastencontainer/kastenblob"
       azureCredentials:
         storageAccount:
           name: azure-creds
